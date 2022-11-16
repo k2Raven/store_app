@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block nav %}
-    <a class="nav-link" href="{% url 'product_add' %}">Добавить товар</a>
     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         Категории
     </a>
@@ -11,7 +10,7 @@
         {% endfor %}
     </ul>
     <form class="d-flex" role="search">
-        {{ form.search }}
+        {{ search_form.search }}
         <button class="btn btn-outline-success ms-2" type="submit">Найти</button>
     </form>
 {% endblock %}
@@ -19,6 +18,13 @@
 
 {% block content %}
     <h1>Список товаров</h1>
+    <div class="card">
+        <div class="card-body">
+            <form action="{% url 'product_add' %}" method="POST">
+                {% include 'partial/product_form.html' with button_text='Создать' %}
+            </form>
+        </div>
+    </div>
 
     {% include "partial/product_list.html" %}
 {% endblock %}
