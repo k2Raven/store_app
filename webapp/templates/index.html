@@ -1,28 +1,24 @@
 {% extends 'base.html' %}
 
 {% block nav %}
-
-    <form class="d-flex" role="search ms-auto">
+    <a class="nav-link" href="{% url 'product_add' %}">Добавить товар</a>
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Категории
+    </a>
+    <ul class="dropdown-menu">
+        {% for key, category in categories %}
+            <li><a class="dropdown-item" href="{% url 'product_by_category' key %}">{{ category }}</a></li>
+        {% endfor %}
+    </ul>
+    <form class="d-flex" role="search">
         {{ form.search }}
-      <button class="btn btn-outline-success ms-2" type="submit">Найти</button>
+        <button class="btn btn-outline-success ms-2" type="submit">Найти</button>
     </form>
 {% endblock %}
 
 
 {% block content %}
     <h1>Список товаров</h1>
-    <div class="row">
-    {% for product in products %}
-        <div class="col-sm-4 my-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <p class="card-text">Цена: {{ product.price }}</p>
-                    <p class="card-text">Категория: {{ product.get_category_display }}</p>
-                    <a href="{% url 'product_view' product.pk %}" class="btn btn-primary">Подробнее</a>
-                </div>
-            </div>
-        </div>
-    {% endfor %}
-    </div>
+
+    {% include "partial/product_list.html" %}
 {% endblock %}

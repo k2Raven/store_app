@@ -1,0 +1,14 @@
+<div class="row">
+    {% for product in products %}
+        <div class="col-sm-4 my-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">Цена: {{ product.price }}</p>
+                    <p class="card-text">Категория: <a href="{% url 'product_by_category' product.category %}">{{ product.get_category_display }}</a></p>
+                    <a href="{% url 'product_view' product.pk %}" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
