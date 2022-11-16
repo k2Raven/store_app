@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Список товаров</h1>
+    <div class="row">
+    {% for product in products %}
+        <div class="col-sm-4 my-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">Цена: {{ product.price }}</p>
+                    <p class="card-text">Категория: {{ product.get_category_display }}</p>
+                    <a href="{% url 'product_view' product.pk %}" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
