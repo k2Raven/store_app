@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator
 
 CATEGORIES_CHOICES = [("other", "Разное"), ("electronics", "Электроника"), ("books", "Книги"),
                       ("stationery", "Канцтовары")]
@@ -11,7 +12,8 @@ class Product(models.Model):
     category = models.CharField(max_length=50, choices=CATEGORIES_CHOICES, default=CATEGORIES_CHOICES[0][0],
                                 verbose_name="Категория")
     balance = models.PositiveIntegerField(verbose_name='Остаток')
-    price = models.DecimalField(max_digits=7, decimal_places=2, verbose_name="Стоимость")
+    price = models.DecimalField(max_digits=7, decimal_places=2, verbose_name="Стоимость",
+                                validators=(MinValueValidator(0),))
 
     def __str__(self):
         return f'{self.id}. {self.name}'
