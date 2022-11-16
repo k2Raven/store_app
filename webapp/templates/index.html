@@ -1,5 +1,14 @@
 {% extends 'base.html' %}
 
+{% block nav %}
+
+    <form class="d-flex" role="search ms-auto">
+        {{ form.search }}
+      <button class="btn btn-outline-success ms-2" type="submit">Найти</button>
+    </form>
+{% endblock %}
+
+
 {% block content %}
     <h1>Список товаров</h1>
     <div class="row">
