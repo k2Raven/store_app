@@ -1,0 +1,75 @@
+[
+{
+  "model": "webapp.product",
+  "pk": 1,
+  "fields": {
+    "name": "Товар 1",
+    "description": "описание товара 1",
+    "category": "electronics",
+    "balance": 3,
+    "price": "888.00"
+  }
+},
+{
+  "model": "webapp.product",
+  "pk": 2,
+  "fields": {
+    "name": "Товар 2",
+    "description": "описание товара 2",
+    "category": "books",
+    "balance": 0,
+    "price": "300.00"
+  }
+},
+{
+  "model": "webapp.product",
+  "pk": 3,
+  "fields": {
+    "name": "товар 3",
+    "description": "",
+    "category": "stationery",
+    "balance": 4,
+    "price": "888.00"
+  }
+},
+{
+  "model": "webapp.product",
+  "pk": 4,
+  "fields": {
+    "name": "Товар 5",
+    "description": "",
+    "category": "other",
+    "balance": 0,
+    "price": "30.30"
+  }
+},
+{
+  "model": "webapp.product",
+  "pk": 5,
+  "fields": {
+    "name": "Товар 4",
+    "description": "Описание товара 4",
+    "category": "stationery",
+    "balance": 6,
+    "price": "33.00"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$390000$075AMj7kxkghotaCEY3LFo$8Tyu4DdQ47HVSgnkNVQfQTc8LSdQqE9UmFodDhJvmZY=",
+    "last_login": "2022-11-16T13:42:41.978Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2022-11-16T13:41:58.507Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
