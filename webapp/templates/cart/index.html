@@ -37,4 +37,8 @@
     </table>
     <h5>Общая цена: {{ total }}</h5>
 
+    <form action="{% url 'order_create' %}" method="POST">
+        {% include 'partial/product_form.html' with button_text='Заказать' %}
+    </form>
+
 {% endblock %}
