@@ -21,6 +21,10 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 {% block nav %}{% endblock %}
+
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'cart_index' %}">Корзина</a>
+                </li>
             </div>
         </div>
     </div>
