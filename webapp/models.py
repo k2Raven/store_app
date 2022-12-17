@@ -21,7 +21,7 @@ class Product(models.Model):
 
 class Cart(models.Model):
     product = models.ForeignKey('webapp.Product', on_delete=models.CASCADE, related_name='cart', verbose_name='Товар')
-    qty = models.PositiveIntegerField(default=1, verbose_name='Количество')
+    qty = models.PositiveIntegerField(default=0, verbose_name='Количество')
 
     def __str__(self):
         return f'{self.product.name} - {self.qty}'

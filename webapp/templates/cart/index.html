@@ -21,6 +21,7 @@
             <th scope="col">Цена</th>
             <th scope="col">Сумма</th>
             <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -30,6 +31,7 @@
                 <td>{{ cart.qty }}</td>
                 <td>{{ cart.product.price }}</td>
                 <td>{{ cart.get_product_total }}</td>
+                <td><a href="{% url 'cart_delete_one' cart.pk %}">Удалить один</a></td>
                 <td><a href="{% url 'cart_delete' cart.pk %}">Удалить</a></td>
             </tr>
         {% endfor %}
