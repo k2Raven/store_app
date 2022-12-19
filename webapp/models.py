@@ -29,6 +29,13 @@ class Cart(models.Model):
     def get_product_total(self):
         return self.qty * self.product.price
 
+    @classmethod
+    def get_total(cls):
+        total = 0
+        for cart in cls.objects.all():
+            total += cart.get_product_total()
+        return total
+
 
 class OrderProduct(models.Model):
     product = models.ForeignKey('webapp.Product', on_delete=models.CASCADE, verbose_name='Товар')
