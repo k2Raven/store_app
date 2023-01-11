@@ -25,14 +25,14 @@
         </tr>
         </thead>
         <tbody>
-        {% for cart in carts %}
+        {% for cart in products %}
             <tr>
                 <th>{{ cart.product.name }}</th>
                 <td>{{ cart.qty }}</td>
                 <td>{{ cart.product.price }}</td>
-                <td>{{ cart.get_product_total }}</td>
-                <td><a href="{% url 'cart_delete_one' cart.pk %}">Удалить один</a></td>
-                <td><a href="{% url 'cart_delete' cart.pk %}">Удалить</a></td>
+                <td>{{ cart.product_total }}</td>
+                <td><a href="{% url 'cart_delete_one' cart.product.pk %}">Удалить один</a></td>
+                <td><a href="{% url 'cart_delete' cart.product.pk %}">Удалить</a></td>
             </tr>
         {% endfor %}
         </tbody>

@@ -1,5 +1,7 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.core.validators import MinValueValidator
+from django.db.models import F, Sum
 
 CATEGORIES_CHOICES = [("other", "Разное"), ("electronics", "Электроника"), ("books", "Книги"),
                       ("stationery", "Канцтовары")]
@@ -19,28 +21,14 @@ class Product(models.Model):
         return f'{self.id}. {self.name} - {self.balance}'
 
 
-class Cart(models.Model):
-    product = models.ForeignKey('webapp.Product', on_delete=models.CASCADE, related_name='cart', verbose_name='Товар')
-    qty = models.PositiveIntegerField(default=0, verbose_name='Количество')
-
-    def __str__(self):
-        return f'{self.product.name} - {self.qty}'
-
-    def get_product_total(self):
-        return self.qty * self.product.price
-
-    @classmethod
-    def get_total(cls):
-        total = 0
-        for cart in cls.objects.all():
-            total += cart.get_product_total()
-        return total
-
-
 class OrderProduct(models.Model):
     product = models.ForeignKey('webapp.Product', on_delete=models.CASCADE, verbose_name='Товар')
-    order = models.ForeignKey('webapp.Order', on_delete=models.CASCADE, verbose_name='Заказ')
+    order = models.ForeignKey('webapp.Order', on_delete=models.CASCADE, related_name='order_product', verbose_name='Заказ')
     qty = models.PositiveIntegerField(verbose_name='Количество')
+
+
+    def get_product_total(self):
+        return self.product.price * self.qty
 
 
 class Order(models.Model):
@@ -50,3 +38,11 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата и время создания')
     products = models.ManyToManyField('webapp.Product', related_name='order', through='webapp.OrderProduct',
                                       through_fields=['order', 'product'], verbose_name='Товары')
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True, blank=True, verbose_name='Пользователь')
+
+
+
+    def get_total(self):
+        total = self.order_product.aggregate(total=Sum(F('qty') * F('product__price')))
+        print(total)
+        return total['total']

@@ -14,12 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from webapp.views import ProductList, ProductDetail, ProductCreate, ProductUpdate, ProductDelete, AddItemToCart, \
-    CartList, CartDelete, OrderCreate, CartDeleteOne
+    CartList, CartDelete, OrderCreate, CartDeleteOne, OrderList
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include("accounts.urls")),
     path('', ProductList.as_view(), name='index'),
     path('product/<int:pk>/view/', ProductDetail.as_view(), name='product_view'),
     path('product/<int:pk>/add_to_cart/', AddItemToCart.as_view(), name='add_to_cart'),
@@ -28,6 +29,7 @@ urlpatterns = [
     path('product/add/', ProductCreate.as_view(), name='product_add'),
     path('cart/', CartList.as_view(), name='cart_index'),
     path('order/', OrderCreate.as_view(), name='order_create'),
-    path('cart/<int:pk>/delete/', CartDelete.as_view(), name='cart_delete'),
-    path('cart/<int:pk>/delete_one/', CartDeleteOne.as_view(), name='cart_delete_one'),
+    path('order/list/', OrderList.as_view(), name='order_list'),
+    path('cart/<str:pk>/delete/', CartDelete.as_view(), name='cart_delete'),
+    path('cart/<str:pk>/delete_one/', CartDeleteOne.as_view(), name='cart_delete_one'),
 ]

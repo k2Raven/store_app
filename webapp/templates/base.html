@@ -25,7 +25,20 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{% url 'cart_index' %}">Корзина</a>
                 </li>
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{% url 'order_list' %}">История заказов</a>
+                    </li>
+                {% endif %}
             </div>
+            {% if request.user.is_authenticated %}
+                <p class="ms-auto text-secondary d-inline-block my-0 py-auto">Привет, {{ request.user.username }}</p>
+                <a class="btn btn-dark ms-2"
+                   href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}">Выйти</a>
+            {% else %}
+                <a class="btn btn-dark ms-auto" href="{% url 'accounts:login' %}?next={% if request.GET.next %}{{ request.GET.next }}{% else %}{{ request.get_full_path }}{% endif %}">Войти</a>
+                <a class="btn btn-outline-secondary ms-2" href="{% url 'accounts:create' %}?next={% if request.GET.next %}{{ request.GET.next }}{% else %}{{ request.get_full_path }}{% endif %}">Регистрация</a>
+            {% endif %}
         </div>
     </div>
 </nav>
